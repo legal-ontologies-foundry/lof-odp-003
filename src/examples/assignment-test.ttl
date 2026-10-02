@@ -1,0 +1,17 @@
+# Discriminating test between ODP-003 Option A and Option B.
+# Northside assigns its claim to rent to a collection agency.
+# If the assignee holds the SAME claim, Option A (functional 'held by',
+# after BFO's one-bearer axiom) is inconsistent; Option B is consistent.
+# Under Option A the assignment must instead be modeled as the ending of
+# Northside's claim and the creation of a new claim held by the agency.
+@prefix ex:   <http://example.org/lof/lease/> .
+@prefix odp3: <https://w3id.org/lof/ODP003_> .
+@prefix obo:  <http://purl.obolibrary.org/obo/> .
+@prefix owl:  <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+<http://example.org/lof/assignment-test> a owl:Ontology .
+
+ex:agency a obo:BFO_0000040 ; rdfs:label "Metro Collections Inc." .
+ex:northsideRentClaim odp3:0001100 ex:agency .
+[] a owl:AllDifferent ; owl:distinctMembers ( ex:ana ex:northside ex:agency ) .

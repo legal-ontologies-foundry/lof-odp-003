@@ -1,0 +1,140 @@
+Prefix(:=<https://w3id.org/lof/ODP003_>)
+Prefix(odp1:=<https://w3id.org/lof/ODP001_>)
+Prefix(owl:=<http://www.w3.org/2002/07/owl#>)
+Prefix(rdf:=<http://www.w3.org/1999/02/22-rdf-syntax-ns#>)
+Prefix(xml:=<http://www.w3.org/XML/1998/namespace>)
+Prefix(xsd:=<http://www.w3.org/2001/XMLSchema#>)
+Prefix(rdfs:=<http://www.w3.org/2000/01/rdf-schema#>)
+Prefix(dcterms:=<http://purl.org/dc/terms/>)
+Prefix(skos:=<http://www.w3.org/2004/02/skos/core#>)
+Prefix(obo:=<http://purl.obolibrary.org/obo/>)
+
+# ALTERNATIVE (Option B: generically dependent placement).
+# Kept in parallel with the editors' file for decision by the founding coordinators.
+
+Ontology(<https://w3id.org/lof/odp-003/alternatives/option-b.owl>
+Import(<https://w3id.org/lof/odp-003/imports/bfo_import.owl>)
+Import(<https://w3id.org/lof/odp-003/imports/odp-001_import.owl>)
+Annotation(dcterms:title "LOF-ODP-003: Correlative Deontic Positions"@en)
+Annotation(dcterms:description "LOF-ODP-003, Option B: legal positions placed under generically dependent continuant. Identical to Option A except for the placement of legal position and the character of 'held by'. DRAFT."@en)
+Annotation(dcterms:license <https://creativecommons.org/licenses/by/4.0/>)
+Annotation(dcterms:creator "David R. Koepsell")
+
+# ---------------------------------------------------------------- classes
+
+Declaration(Class(:0001000))
+AnnotationAssertion(rdfs:label :0001000 "legal position"@en)
+AnnotationAssertion(skos:definition :0001000 "A continuant that is held by a person or organization in virtue of some legal content, and that consists in what the holder is legally required, permitted, or enabled to do, or protected from having done to them, in relation to some other party."@en)
+AnnotationAssertion(rdfs:comment :0001000 "BFO placement, OPTION B (LOF-P-004): a legal position is a generically dependent continuant, like the legal content that grounds it. It is related to its holder by 'held by' rather than by inherence, so the same position can survive a change of holder (assignment of a claim, succession to a debt on death). OPEN QUESTION for the founding coordinators; see Option A."@en)
+AnnotationAssertion(skos:altLabel :0001000 "Hohfeldian position"@en)
+SubClassOf(:0001000 obo:BFO_0000031)
+SubClassOf(:0001000 ObjectSomeValuesFrom(:0001100 obo:BFO_0000040))
+SubClassOf(:0001000 ObjectSomeValuesFrom(:0001101 odp1:0001001))
+SubClassOf(:0001000 ObjectSomeValuesFrom(:0001102 :0001000))
+
+Declaration(Class(:0001009))
+AnnotationAssertion(rdfs:label :0001009 "first-order legal position"@en)
+AnnotationAssertion(skos:definition :0001009 "A legal position that concerns what its holder or another party is required or permitted to do."@en)
+SubClassOf(:0001009 :0001000)
+
+Declaration(Class(:0001010))
+AnnotationAssertion(rdfs:label :0001010 "second-order legal position"@en)
+AnnotationAssertion(skos:definition :0001010 "A legal position that concerns whether its holder or another party can change first-order or second-order legal positions."@en)
+SubClassOf(:0001010 :0001000)
+
+DisjointClasses(:0001009 :0001010)
+
+Declaration(Class(:0001001))
+AnnotationAssertion(rdfs:label :0001001 "claim"@en)
+AnnotationAssertion(skos:definition :0001001 "A first-order legal position in virtue of which its holder is owed some conduct by another party."@en)
+AnnotationAssertion(skos:altLabel :0001001 "right"@en)
+SubClassOf(:0001001 :0001009)
+SubClassOf(:0001001 ObjectAllValuesFrom(:0001102 :0001002))
+
+Declaration(Class(:0001002))
+AnnotationAssertion(rdfs:label :0001002 "duty"@en)
+AnnotationAssertion(skos:definition :0001002 "A first-order legal position in virtue of which its holder is required to engage in, or refrain from, some conduct owed to another party."@en)
+SubClassOf(:0001002 :0001009)
+SubClassOf(:0001002 ObjectAllValuesFrom(:0001102 :0001001))
+
+SubClassOf(:0001001 ObjectSomeValuesFrom(:0001102 :0001002))
+SubClassOf(:0001002 ObjectSomeValuesFrom(:0001102 :0001001))
+
+Declaration(Class(:0001003))
+AnnotationAssertion(rdfs:label :0001003 "liberty"@en)
+AnnotationAssertion(skos:definition :0001003 "A first-order legal position in virtue of which its holder is not under a duty to another party to refrain from some conduct."@en)
+AnnotationAssertion(skos:altLabel :0001003 "privilege"@en)
+SubClassOf(:0001003 :0001009)
+SubClassOf(:0001003 ObjectAllValuesFrom(:0001102 :0001004))
+
+Declaration(Class(:0001004))
+AnnotationAssertion(rdfs:label :0001004 "no-claim"@en)
+AnnotationAssertion(skos:definition :0001004 "A first-order legal position in virtue of which its holder has no claim against another party with respect to some conduct of that party."@en)
+AnnotationAssertion(skos:altLabel :0001004 "no-right"@en)
+SubClassOf(:0001004 :0001009)
+SubClassOf(:0001004 ObjectAllValuesFrom(:0001102 :0001003))
+
+SubClassOf(:0001003 ObjectSomeValuesFrom(:0001102 :0001004))
+SubClassOf(:0001004 ObjectSomeValuesFrom(:0001102 :0001003))
+
+Declaration(Class(:0001005))
+AnnotationAssertion(rdfs:label :0001005 "power"@en)
+AnnotationAssertion(skos:definition :0001005 "A second-order legal position in virtue of which its holder can, by some legal act, change the legal positions of another party."@en)
+SubClassOf(:0001005 :0001010)
+SubClassOf(:0001005 ObjectAllValuesFrom(:0001102 :0001006))
+
+Declaration(Class(:0001006))
+AnnotationAssertion(rdfs:label :0001006 "liability"@en)
+AnnotationAssertion(skos:definition :0001006 "A second-order legal position in virtue of which its holder's legal positions can be changed by some legal act of another party."@en)
+SubClassOf(:0001006 :0001010)
+SubClassOf(:0001006 ObjectAllValuesFrom(:0001102 :0001005))
+
+SubClassOf(:0001005 ObjectSomeValuesFrom(:0001102 :0001006))
+SubClassOf(:0001006 ObjectSomeValuesFrom(:0001102 :0001005))
+
+Declaration(Class(:0001007))
+AnnotationAssertion(rdfs:label :0001007 "immunity"@en)
+AnnotationAssertion(skos:definition :0001007 "A second-order legal position in virtue of which its holder's legal positions cannot be changed by some legal act of another party."@en)
+SubClassOf(:0001007 :0001010)
+SubClassOf(:0001007 ObjectAllValuesFrom(:0001102 :0001008))
+
+Declaration(Class(:0001008))
+AnnotationAssertion(rdfs:label :0001008 "disability"@en)
+AnnotationAssertion(skos:definition :0001008 "A second-order legal position in virtue of which its holder cannot, by some legal act, change the legal positions of another party."@en)
+SubClassOf(:0001008 :0001010)
+SubClassOf(:0001008 ObjectAllValuesFrom(:0001102 :0001007))
+
+SubClassOf(:0001007 ObjectSomeValuesFrom(:0001102 :0001008))
+SubClassOf(:0001008 ObjectSomeValuesFrom(:0001102 :0001007))
+
+DisjointClasses(:0001001 :0001002 :0001003 :0001004 :0001005 :0001006 :0001007 :0001008)
+
+# ---------------------------------------------------------------- relations
+
+Declaration(ObjectProperty(:0001100))
+AnnotationAssertion(rdfs:label :0001100 "held by"@en)
+AnnotationAssertion(skos:definition :0001100 "A relation between a legal position and the person or organization whose position it is."@en)
+AnnotationAssertion(rdfs:comment :0001100 "In Option B this is not a subproperty of inherence; a legal position is related to its holder without inhering in it."@en)
+ObjectPropertyDomain(:0001100 :0001000)
+ObjectPropertyRange(:0001100 obo:BFO_0000040)
+
+Declaration(ObjectProperty(:0001101))
+AnnotationAssertion(rdfs:label :0001101 "grounded in"@en)
+AnnotationAssertion(skos:definition :0001101 "A relation between a legal position and the legal content in virtue of which it exists, such as the contract term creating a duty to pay."@en)
+ObjectPropertyDomain(:0001101 :0001000)
+ObjectPropertyRange(:0001101 odp1:0001001)
+
+Declaration(ObjectProperty(:0001102))
+AnnotationAssertion(rdfs:label :0001102 "correlative of"@en)
+AnnotationAssertion(skos:definition :0001102 "A symmetric relation between two legal positions held by different parties, each of which exists if and only if the other does, such as a claim and the duty owed in satisfaction of it."@en)
+SymmetricObjectProperty(:0001102)
+ObjectPropertyDomain(:0001102 :0001000)
+ObjectPropertyRange(:0001102 :0001000)
+
+Declaration(ObjectProperty(:0001103))
+AnnotationAssertion(rdfs:label :0001103 "exercised in"@en)
+AnnotationAssertion(skos:definition :0001103 "A relation between a power and a legal act through which the holder of the power changes the legal positions of another party."@en)
+ObjectPropertyDomain(:0001103 :0001005)
+ObjectPropertyRange(:0001103 odp1:0001000)
+
+)

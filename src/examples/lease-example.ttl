@@ -1,0 +1,68 @@
+# Worked example for LOF-ODP-001, 002, and 003: a residential lease.
+# Hypothetical parties. Load together with the three pattern releases.
+@prefix ex:    <http://example.org/lof/lease/> .
+@prefix odp1:  <https://w3id.org/lof/ODP001_> .
+@prefix odp2:  <https://w3id.org/lof/ODP002_> .
+@prefix odp3:  <https://w3id.org/lof/ODP003_> .
+@prefix obo:   <http://purl.obolibrary.org/obo/> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+
+<http://example.org/lof/lease> a owl:Ontology .
+
+# ---- Parties (persons and organizations, as material entities) ----
+ex:ana        a obo:BFO_0000040 ; rdfs:label "Ana Ruiz" .
+ex:northside  a obo:BFO_0000040 ; rdfs:label "Northside Properties LLC" .
+
+# ---- ODP-001: act, content, documents ----
+ex:tenantCode a odp1:0001001 ;
+    rdfs:label "provisions of the state landlord-tenant code" .
+
+ex:leaseSigning a odp1:0001004 ;                       # contract formation
+    rdfs:label "signing of the lease, 1 March" ;
+    obo:BFO_0000057 ex:ana , ex:northside ;           # has participant
+    odp1:0001100 ex:leaseTerms ;                       # establishes
+    odp1:0001102 ex:tenantCode .                       # performed under
+
+ex:leaseTerms a odp1:0001001 ; rdfs:label "terms of the lease" .
+
+ex:copyHeldByAna       a odp1:0001002 ; obo:BFO_0000101 ex:leaseTerms .   # is carrier of
+ex:copyHeldByNorthside a odp1:0001002 ; obo:BFO_0000101 ex:leaseTerms .
+
+# ---- ODP-002: roles conferred by the signing ----
+ex:anaTenantRole a odp2:0001000 ;                      # legal role
+    rdfs:label "Ana's role as tenant" ;
+    obo:BFO_0000197 ex:ana ;                           # inheres in
+    odp2:0001101 ex:leaseSigning ;                     # conferred by
+    odp2:0001103 ex:leaseTerms .                       # specified by
+
+ex:northsideLandlordRole a odp2:0001000 ;
+    rdfs:label "Northside's role as landlord" ;
+    obo:BFO_0000197 ex:northside ;
+    odp2:0001101 ex:leaseSigning ;
+    odp2:0001103 ex:leaseTerms .
+
+# ---- ODP-003: correlative positions ----
+ex:anaRentDuty a odp3:0001002 ;                        # duty
+    rdfs:label "Ana's duty to pay monthly rent" ;
+    odp3:0001100 ex:ana ;                              # held by
+    odp3:0001101 ex:leaseTerms ;                       # grounded in
+    odp3:0001102 ex:northsideRentClaim .               # correlative of
+
+ex:northsideRentClaim a odp3:0001001 ;                 # claim
+    rdfs:label "Northside's claim to monthly rent" ;
+    odp3:0001100 ex:northside ;
+    odp3:0001101 ex:leaseTerms .
+
+ex:northsideTerminationPower a odp3:0001005 ;          # power
+    rdfs:label "Northside's power to terminate on default" ;
+    odp3:0001100 ex:northside ;
+    odp3:0001101 ex:tenantCode ;
+    odp3:0001102 ex:anaTerminationLiability .
+
+ex:anaTerminationLiability a odp3:0001006 ;            # liability
+    rdfs:label "Ana's liability to termination on default" ;
+    odp3:0001100 ex:ana ;
+    odp3:0001101 ex:tenantCode .
+
+[] a owl:AllDifferent ; owl:distinctMembers ( ex:ana ex:northside ) .
