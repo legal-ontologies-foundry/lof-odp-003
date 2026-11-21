@@ -1,0 +1,12 @@
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix lof: <https://w3id.org/lof/> .
+# PROPOSED ADDITION to LOF-ODP-003 (both options), from the regime test suite.
+<https://w3id.org/lof/odp-003/proposed/in-rem.ttl> a owl:Ontology .
+lof:ODP003_0001012 a owl:Class ;
+  rdfs:label "position in rem"@en ;
+  skos:definition "A legal position whose correlative positions are held by persons generally, not by persons determined by the act or content that grounds it."@en ;
+  rdfs:comment "Hohfeld's multital rights: ownership, native title ('as against the whole world', Mabo v Queensland (No 2)), a patentee's right to exclude, a right of privacy. Correlatives are recorded only for the persons actually in issue (an infringer, a trespasser); the rest are left implicit, which the existential restriction on 'correlative of' already allows. A position in rem is typically also directed at a thing (LOF-ODP-004 'directed at'), but need not be (rights in one's own person). Added because the regime test suite (native title, patent) could not otherwise distinguish a right against the world from a right against one person."@en ;
+  skos:altLabel "multital position"@en ; skos:altLabel "right in rem"@en ;
+  rdfs:subClassOf lof:ODP003_0001000 .
