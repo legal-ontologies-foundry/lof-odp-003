@@ -3,6 +3,13 @@
 All notable changes are recorded here. Versions follow semantic versioning
 (LOF-P-006).
 
+## [Unreleased] - proposed for 0.3.0
+
+### Added
+
+- A legal relation class (generically dependent continuant concretized by the correlative positions) and positions in rem, as separate modules; tested with the assignment example.
+- Tested with the cross-regime test suite (14 legal regimes, 85 competency questions) on the released 0.2.0 patterns: all pass.
+
 ## [0.2.0] - 2026-10-16
 
 - Placement decided: legal position is now a BFO role (BFO:0000023), aligned with the D-Acts deontic roles. Proposed by W. Mandrick, issue #9.

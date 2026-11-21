@@ -1,0 +1,19 @@
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix obo: <http://purl.obolibrary.org/obo/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix lof: <https://w3id.org/lof/> .
+
+# PROPOSED ADDITION to the LOF-ODP-003 editors' file (Option A), for the placement
+# decision record (docs/odp/odp-003-decision.md). Not valid with Option B: BFO
+# 'concretizes' has domain process or specifically dependent continuant.
+
+<https://w3id.org/lof/odp-003/proposed/legal-relation.ttl> a owl:Ontology .
+
+lof:ODP003_0001011 a owl:Class ;
+  rdfs:label "legal relation"@en ;
+  skos:definition "A generically dependent continuant that is concretized by a legal position and its correlative, held by two parties, and that can persist while the parties holding them change."@en ;
+  rdfs:comment "Proposed with Option A as 'Option A with legal relations'. The obligation (vinculum juris) between creditor and debtor, as distinct from the creditor's claim and the debtor's duty in which it is concretized. Assignment of a claim ends the assignor's claim and begins a new claim in the assignee, and both concretize the same legal relation: that is the sense in which the assignee holds 'the same claim'. The relation, not the position, is what passes, carrying with it the debtor's defences (the assignee takes subject to the equities). Answers ODP-003 open question 4 in the affirmative, and has the shape proposed for offices in LOF-ODP-002 open question 1: a generically dependent continuant concretized in successive bearers."@en ;
+  skos:altLabel "obligation (vinculum juris)"@en ;
+  rdfs:subClassOf obo:BFO_0000031 ,
+    [ a owl:Restriction ; owl:onProperty obo:BFO_0000058 ; owl:someValuesFrom lof:ODP003_0001000 ] .
