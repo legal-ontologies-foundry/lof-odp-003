@@ -9,14 +9,14 @@ Prefix(dcterms:=<http://purl.org/dc/terms/>)
 Prefix(skos:=<http://www.w3.org/2004/02/skos/core#>)
 Prefix(obo:=<http://purl.obolibrary.org/obo/>)
 
-# EDITORS' FILE (Option A: specifically dependent placement). Edit in Protégé.
-# The alternative, Option B, is in alternatives/lof-odp-003-option-b.owl
+# EDITORS' FILE. Edit in Protégé. Legal positions are BFO roles (0.2.0; formerly Option A).
+# The superseded Option B (generically dependent placement) is archived in alternatives/.
 
 Ontology(<https://w3id.org/lof/odp-003.owl>
 Import(<https://w3id.org/lof/odp-003/imports/bfo_import.owl>)
 Import(<https://w3id.org/lof/odp-003/imports/odp-001_import.owl>)
 Annotation(dcterms:title "LOF-ODP-003: Correlative Deontic Positions"@en)
-Annotation(dcterms:description "Ontology design pattern for Hohfeld's correlative legal positions (claim and duty, liberty and no-claim, power and liability, immunity and disability), grounded in legal content from LOF-ODP-001. This file encodes Option A, which places legal positions under specifically dependent continuant. Option B, placing them under generically dependent continuant, is maintained in parallel for decision by the founding coordinators. DRAFT."@en)
+Annotation(dcterms:description "Ontology design pattern for Hohfeld's correlative legal positions (claim and duty, liberty and no-claim, power and liability, immunity and disability), grounded in legal content from LOF-ODP-001. Legal positions are BFO roles inhering in their holders, aligned with the deontic roles of the Document Act Ontology (D-Acts). DRAFT."@en)
 Annotation(dcterms:license <https://creativecommons.org/licenses/by/4.0/>)
 Annotation(dcterms:creator "David R. Koepsell")
 
@@ -25,9 +25,9 @@ Annotation(dcterms:creator "David R. Koepsell")
 Declaration(Class(:0001000))
 AnnotationAssertion(rdfs:label :0001000 "legal position"@en)
 AnnotationAssertion(skos:definition :0001000 "A continuant that is held by a person or organization in virtue of some legal content, and that consists in what the holder is legally required, permitted, or enabled to do, or protected from having done to them, in relation to some other party."@en)
-AnnotationAssertion(rdfs:comment :0001000 "BFO placement, OPTION A (LOF-P-004): a legal position is a specifically dependent continuant inhering in its holder, as a role or disposition does. It exists only as long as its holder exists and cannot migrate from one holder to another, so assignment of a claim is modeled as the termination of one position and the creation of a new one in the assignee. OPEN QUESTION for the founding coordinators; see Option B."@en)
+AnnotationAssertion(rdfs:comment :0001000 "BFO placement (LOF-P-004): a legal position is a role. It inheres in its holder because of the holder's legal circumstances (a contract, a statute, an appointment), not the holder's physical make-up, and it is realized when the holder complies, acts, or exercises it. Like every specifically dependent continuant it has exactly one holder, so the assignment of a claim or the passing of command authority ends one position and begins another, linked by 'succeeds'. Adopted in 0.2.0 on W. Mandrick's proposal (issue #9) to align with the D-Acts deontic roles; this resolves the former Option A versus Option B question."@en)
 AnnotationAssertion(skos:altLabel :0001000 "Hohfeldian position"@en)
-SubClassOf(:0001000 obo:BFO_0000020)
+SubClassOf(:0001000 obo:BFO_0000023)
 SubClassOf(:0001000 ObjectSomeValuesFrom(:0001100 obo:BFO_0000040))
 SubClassOf(:0001000 ObjectSomeValuesFrom(:0001101 odp1:0001001))
 SubClassOf(:0001000 ObjectSomeValuesFrom(:0001102 :0001000))
@@ -114,7 +114,7 @@ DisjointClasses(:0001001 :0001002 :0001003 :0001004 :0001005 :0001006 :0001007 :
 Declaration(ObjectProperty(:0001100))
 AnnotationAssertion(rdfs:label :0001100 "held by"@en)
 AnnotationAssertion(skos:definition :0001100 "A relation between a legal position and the person or organization whose position it is."@en)
-AnnotationAssertion(rdfs:comment :0001100 "In Option A this is a functional subproperty of BFO 'inheres in', reflecting BFO's axiom that a specifically dependent continuant has exactly one bearer. A position can therefore never have two holders, even at different times."@en)
+AnnotationAssertion(rdfs:comment :0001100 "A functional subproperty of BFO 'inheres in', reflecting the one-bearer axiom of ISO/IEC 21838-2. A position never has two holders; a change of holder is a new position that succeeds the old one."@en)
 ObjectPropertyDomain(:0001100 :0001000)
 ObjectPropertyRange(:0001100 obo:BFO_0000040)
 SubObjectPropertyOf(:0001100 obo:BFO_0000197)
@@ -138,5 +138,16 @@ AnnotationAssertion(rdfs:label :0001103 "exercised in"@en)
 AnnotationAssertion(skos:definition :0001103 "A relation between a power and a legal act through which the holder of the power changes the legal positions of another party."@en)
 ObjectPropertyDomain(:0001103 :0001005)
 ObjectPropertyRange(:0001103 odp1:0001000)
+SubObjectPropertyOf(:0001103 obo:BFO_0000054)
+AnnotationAssertion(rdfs:comment :0001103 "A subproperty of BFO 'realized in': the legal act realizes the power exercised in it. This is the sense in which a role conferral act 'realizes' something (W. Mandrick, ODP 2 slide): it realizes the conferring party's power, which corresponds to the D-Acts deontic declaration performer role, not the role it confers."@en)
+
+Declaration(ObjectProperty(:0001104))
+AnnotationAssertion(rdfs:label :0001104 "succeeds"@en)
+AnnotationAssertion(skos:definition :0001104 "A relation between a legal position and an earlier legal position, held by another party, whose place it takes in the same legal relation through an assignment, a succession, or a transfer of office."@en)
+AnnotationAssertion(skos:example :0001104 "a collection agency's claim to rent, acquired by assignment, succeeds the landlord's claim; an incoming commander's authority to issue orders succeeds the outgoing commander's"@en)
+AnnotationAssertion(rdfs:comment :0001104 "Lets a query follow 'the same claim' through changes of holder, which Option B had obtained by making positions generically dependent, without giving up the one-bearer axiom."@en)
+ObjectPropertyDomain(:0001104 :0001000)
+ObjectPropertyRange(:0001104 :0001000)
+IrreflexiveObjectProperty(:0001104)
 
 )
